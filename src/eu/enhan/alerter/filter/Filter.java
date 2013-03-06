@@ -1,8 +1,9 @@
 package eu.enhan.alerter.filter;
 
+import com.google.common.collect.ImmutableSet;
+import eu.enhan.alerter.action.ActionFactory;
 import eu.enhan.alerter.common.Email;
 
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -15,7 +16,7 @@ public abstract class Filter {
     }
 
     public enum CombinationOperator{
-        OR, AND
+        OR, AND, ALWAYS_TRUE
     }
 
     protected final Set<FilterRule> rules;
@@ -28,9 +29,13 @@ public abstract class Filter {
 
     abstract public boolean matches(Email email);
 
+	public Set<Runnable> createActions(ActionFactory factory, Email email){
+		return actionTemplate.instantiateActions(factory,email);
+	}
+
     public static class Builder{
         private CombinationOperator operator = CombinationOperator.AND;
-        private Set<FilterRule> rules = new HashSet<FilterRule>();
+        private ImmutableSet.Builder<FilterRule> rules = ImmutableSet.builder();
         private ActionTemplate actionTemplate ;
 
         public Builder withOperator(CombinationOperator operator){
@@ -50,11 +55,16 @@ public abstract class Filter {
 
 
         public Filter build(){
-            if (operator == CombinationOperator.OR){
-                return new OrFilter(rules,actionTemplate);
-            }else{
-                return new AndFilter(rules,actionTemplate );
-            }
+	        switch (operator){
+		        case ALWAYS_TRUE:
+			        return new AllMatchesFilter(actionTemplate);
+		        case AND:
+			        return new AndFilter(rules.build(),actionTemplate);
+		        case OR:
+			        return new OrFilter(rules.build(), actionTemplate);
+	        }
+
+	        return null;
 
         }
 

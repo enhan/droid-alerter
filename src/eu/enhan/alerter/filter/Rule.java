@@ -7,20 +7,11 @@ import eu.enhan.alerter.common.Email;
  */
 public class Rule implements FilterRule {
 
-    public enum Field {
-        FROM, SUBJECT, CONTENT
-    }
-
-    public enum Operator {
-        CONTENTS, STARTS_WITH, ENDS_WITH, EQUALS
-
-    }
-
-    private final Field operand1;
+	private final Field operand1;
     private final String operand2;
     private final Operator operator;
 
-    public Rule(Field operand1, String operand2, Operator operator) {
+    public Rule(Field operand1, Operator operator, String operand2) {
         this.operand1 = operand1;
         this.operand2 = operand2;
         this.operator = operator;

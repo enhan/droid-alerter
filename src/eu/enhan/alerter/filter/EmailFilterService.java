@@ -3,17 +3,14 @@ package eu.enhan.alerter.filter;
 import android.app.IntentService;
 import android.content.Intent;
 import android.os.Build;
-import android.os.Vibrator;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
 import android.util.Log;
 import com.fsck.k9.EmailReceivedIntent;
-import eu.enhan.alerter.common.AlertMessage;
 import eu.enhan.alerter.common.Email;
 
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.concurrent.Semaphore;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,14 +21,11 @@ import java.util.concurrent.Semaphore;
  */
 public class EmailFilterService extends IntentService implements TextToSpeech.OnInitListener{
 
-	private final EmailFilter filter;
+	private EmailFilter filter;
 	private TextToSpeech tts;
-    private final Semaphore ttsSemaphore;
 
 	public EmailFilterService() {
 		super("EmailFilterService");
-		filter = new BasicOnSubjectFilter();
-        ttsSemaphore = new Semaphore(0);
 	}
 
 	@Override
@@ -40,17 +34,14 @@ public class EmailFilterService extends IntentService implements TextToSpeech.On
 		Email email = new Email();
 		email.setSubject(intent.getStringExtra(EmailReceivedIntent.EXTRA_SUBJECT));
 		email.setFrom(intent.getStringExtra(EmailReceivedIntent.EXTRA_FROM));
-		AlertMessage msg = filter.filter(email);
 
-		// TODO filtering alerts and react according to the alert
-        new Thread(new SpeakRunner(msg)).start();
-        Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        if (vibrator != null){
-            Log.d("DROIDALERTER","Vivrator found");
-            vibrator.vibrate(2000);
-        }else{
-            Log.d("DROIDALERTER","Vivrator not found");
-        }
+		Set<Runnable> toRun = filter.createActions(email);
+		Log.d("DROIDALERTER", toRun.size() + " actions to run");
+
+		for(Runnable r : toRun){
+			new Thread(r).start();
+		}
+
 
         Log.d("DROIDALERTER", "Done with the mail");
 
@@ -92,6 +83,7 @@ public class EmailFilterService extends IntentService implements TextToSpeech.On
 	public void onCreate() {
 		super.onCreate();
 		tts = new TextToSpeech(getApplicationContext(), this);
+		filter = new CompositeFilter(tts);
 	}
 
 
@@ -127,20 +119,4 @@ public class EmailFilterService extends IntentService implements TextToSpeech.On
     }
 
 
-    private class SpeakRunner implements Runnable{
-
-        private final AlertMessage message;
-
-        public SpeakRunner(AlertMessage message) {
-            this.message = message;
-        }
-
-        @Override
-        public void run() {
-            HashMap<String, String> params = new HashMap<String, String>();
-            params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1");
-            tts.speak(message.getAlertLevel(), TextToSpeech.QUEUE_ADD, params);
-
-        }
-    }
 }
