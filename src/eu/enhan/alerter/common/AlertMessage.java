@@ -27,4 +27,6 @@ public class AlertMessage {
 	public void setAlertMessage(String alertMessage) {
 		this.alertMessage = alertMessage;
 	}
+
+
 }

@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">droid-alerter</string>
+    <string name="create_false_email">Send false mail</string>
+    <string name="from">From</string>
+    <string name="subject">Subject</string>
+    <string name="content">Content</string>
+    <string name="send">Send</string>
 </resources>

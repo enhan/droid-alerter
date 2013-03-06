@@ -1,7 +1,10 @@
 package eu.enhan.alerter.ui;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import eu.enhan.alerter.R;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,5 +16,12 @@ import android.os.Bundle;
 public class StartActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 	}
+
+
+    public void createFalseMail(View view){
+        Intent intent = new Intent(this, CreateFalseMailActivity.class);
+        startActivity(intent);
+    }
 }
