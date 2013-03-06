@@ -3,6 +3,8 @@ package eu.enhan.alerter.filter;
 import eu.enhan.alerter.common.AlertMessage;
 import eu.enhan.alerter.common.Email;
 
+import java.util.Set;
+
 /**
  * Created with IntelliJ IDEA.
  * User: manu
@@ -24,4 +26,9 @@ public class BasicOnSubjectFilter implements EmailFilter {
 		return msg;
 
 	}
+
+    @Override
+    public Set<Runnable> createActions(Email email) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
 }

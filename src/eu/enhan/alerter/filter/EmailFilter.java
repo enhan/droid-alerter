@@ -3,6 +3,8 @@ package eu.enhan.alerter.filter;
 import eu.enhan.alerter.common.AlertMessage;
 import eu.enhan.alerter.common.Email;
 
+import java.util.Set;
+
 /**
  * Created with IntelliJ IDEA.
  * User: manu
@@ -12,6 +14,9 @@ import eu.enhan.alerter.common.Email;
  */
 public interface EmailFilter {
 
+    @Deprecated
 	AlertMessage filter(Email email);
+
+    Set<Runnable> createActions(Email email);
 
 }

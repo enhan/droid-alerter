@@ -3,6 +3,7 @@ package eu.enhan.alerter.filter;
 import android.app.IntentService;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Vibrator;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
 import android.util.Log;
@@ -43,6 +44,13 @@ public class EmailFilterService extends IntentService implements TextToSpeech.On
 
 		// TODO filtering alerts and react according to the alert
         new Thread(new SpeakRunner(msg)).start();
+        Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+        if (vibrator != null){
+            Log.d("DROIDALERTER","Vivrator found");
+            vibrator.vibrate(2000);
+        }else{
+            Log.d("DROIDALERTER","Vivrator not found");
+        }
 
         Log.d("DROIDALERTER", "Done with the mail");
 
