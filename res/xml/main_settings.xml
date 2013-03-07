@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="@string/prefs_red_title">
-        <CheckBoxPreference android:title="@string/speak"/>
-    </PreferenceCategory>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" android:title="@string/settings">
+    <PreferenceScreen android:title="@string/prefs_red_title" android:icon="@drawable/dialog_error">
+        <ListPreference android:title="@string/sound" android:entries="@array/pref_sound_options" android:entryValues="@array/pref_sound_values" android:key="prefs_red_sound" android:defaultValue="@string/default_sound_value_red"/>
+        <RingtonePreference android:title="@string/ringtone" android:key="prefs_red_ringtone" android:enabled="false"/>
+        <CheckBoxPreference android:title="@string/vibrate" android:key="prefs_red_vibrate" android:defaultValue="true"/>
+        <ListPreference android:title="@string/vibration_pattern" android:key="prefs_red_vibrate_pattern" android:dependency="prefs_red_vibrate" android:entryValues="@array/pref_vibration_values" android:entries="@array/pref_vibration_options" android:defaultValue="@string/vibration_red_default"/>
+    </PreferenceScreen>
+    <PreferenceScreen android:title="@string/prefs_yellow_title" android:icon="@drawable/dialog_warning">
+        <ListPreference android:title="@string/sound" android:entries="@array/pref_sound_options" android:entryValues="@array/pref_sound_values" android:key="prefs_yellow_sound" android:defaultValue="@string/default_sound_value_yellow"/>
+        <RingtonePreference android:title="@string/ringtone" android:key="prefs_yellow_ringtone" android:enabled="false"/>
+        <CheckBoxPreference android:title="@string/vibrate" android:key="prefs_yellow_vibrate" android:defaultValue="true"/>
+        <ListPreference android:title="@string/vibration_pattern" android:key="prefs_yellow_vibrate_pattern" android:dependency="prefs_yellow_vibrate" android:entryValues="@array/pref_vibration_values" android:entries="@array/pref_vibration_options" android:defaultValue="@string/vibration_yellow_default"/>
+    </PreferenceScreen>
+    <PreferenceScreen android:title="@string/prefs_blue_title" android:icon="@drawable/dialog_information">
+        <ListPreference android:title="@string/sound" android:entries="@array/pref_sound_options" android:entryValues="@array/pref_sound_values" android:key="prefs_blue_sound" android:defaultValue="@string/default_sound_value_blue"/>
+        <RingtonePreference android:title="@string/ringtone" android:key="prefs_blue_ringtone" android:enabled="false"/>
+        <CheckBoxPreference android:title="@string/vibrate" android:key="prefs_blue_vibrate" android:defaultValue="true"/>
+        <ListPreference android:title="@string/vibration_pattern" android:key="prefs_blue_vibrate_pattern" android:dependency="prefs_blue_vibrate" android:entryValues="@array/pref_vibration_values" android:entries="@array/pref_vibration_options" android:defaultValue="@string/vibration_blue_default"/>
+    </PreferenceScreen>
 </PreferenceScreen>

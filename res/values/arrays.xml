@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="pref_sound_options">
+        <item>@string/no_sound</item>
+        <item>@string/speak</item>
+        <item>@string/ringtone</item>
+    </string-array>
+    <string-array name="pref_sound_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="pref_vibration_options">
+        <item>@string/vibrate_short</item>
+        <item>@string/vibrate_long</item>
+        <item>@string/vibrate_short_short</item>
+        <item>@string/vibrate_long_long</item>
+    </string-array>
+
+    <string-array name="pref_vibration_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+</resources>
