@@ -6,4 +6,6 @@
     <string name="subject">Subject</string>
     <string name="content">Content</string>
     <string name="send">Send</string>
+    <string name="prefs_red_title">Red Alert</string>
+    <string name="speak">Speak</string><string name="configure">Configure</string>
 </resources>

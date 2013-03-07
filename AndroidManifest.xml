@@ -17,6 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.CreateFalseMailActivity"/>
+        <activity android:name=".ui.MainSettingsActivity"/>
+        <activity android:name=".ui.legacy.LegacySettingsActivity"/>
 
         <service android:name=".filter.EmailFilterService"/>
     </application>

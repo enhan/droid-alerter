@@ -12,4 +12,11 @@
         android:id="@+id/sendSample"
         android:layout_gravity="left|center_vertical"
         android:onClick="createFalseMail"/>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/configure"
+        android:id="@+id/configure"
+        android:onClick="showConfiguration"/>
 </LinearLayout>

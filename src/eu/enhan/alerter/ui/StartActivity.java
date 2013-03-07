@@ -2,9 +2,11 @@ package eu.enhan.alerter.ui;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import eu.enhan.alerter.R;
+import eu.enhan.alerter.ui.legacy.LegacySettingsActivity;
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,4 +26,14 @@ public class StartActivity extends Activity {
         Intent intent = new Intent(this, CreateFalseMailActivity.class);
         startActivity(intent);
     }
+
+
+    public void showConfiguration(View view){
+
+        Class<?> c = Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ? MainSettingsActivity.class : LegacySettingsActivity.class;
+
+        Intent intent = new Intent(this, c);
+        startActivity(intent);
+    }
+
 }
